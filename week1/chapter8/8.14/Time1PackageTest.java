@@ -1,7 +1,9 @@
-// Time1Test.java
+// Time1PackageTest.java
 // Time1 object used in an application
 
-public class Time1Test {
+import com.deitel.jhtp.ch08.Time1;
+
+public class Time1PackageTest {
   public static void main( String[] args ) {
     // Create and init a Time1 object
     Time1 time = new Time1();
