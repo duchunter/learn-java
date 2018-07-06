@@ -1,6 +1,6 @@
-// Fig. 8.17: PackageDataTest.java
+// PackageDataTest.java
 // Package-access members of a class are accessible by other classes
-// in the same package.
+// in the same package
 
 public class PackageDataTest {
   public static void main( String[] args ) {

@@ -6,14 +6,13 @@
 2.3   Still print a line
       Featuring: print, \n (escape sequences)
 
-2.4   Still print that line
+2.4   Still print that line, but formatted
       Featuring: printf
 
 2.5   Add 2 integers inputted from user
       Featuring: java.util.Scanner, nextInt()
 
 2.8   Compare 2 numbers inputted from user
-      Featuring: ==, !=, >=,...
 
                             /// CHAPTER 3 ///
 
@@ -21,17 +20,16 @@
       Featuring: public method in class
 
 3.3   Still that GradeBook, but display course name inputted by user
-      Featuring: method param, nextLine()
+      Featuring: nextLine()
 
 3.4   Still that GradeBook, but using instance variable
-      Featuring: private, set and get method
+      Featuring: private, set and get methods
 
 3.6   Init GradeBook using constructor
       Featuring: constructor
 
 3.7   Account class with a constructor to validate and initialize instance
       variable of type double
-      Featuring: double
 
 3.8   Add 2 numbers and display result using GUI (dialog box)
       Featuring: javax.swing.JOptionPane, showMessageDialog, showInputDialog,
@@ -39,108 +37,152 @@
 
                             /// CHAPTER 4 ///
 
-4.8
+4.8   Using class GradeBook and counter-controlled repetition method,
+      calculate average grade (fixed number of grades)
 
-4.9
+4.9   Using class GradeBook and sentinel-controlled repetition method,
+      calculate average grade (non-fixed number of grades)
 
-4.10
+4.10  Count passed and failed students by adding if else in while loop
 
-4.12
+4.12  Test prefix (++num) and postfix (num++) increment
 
-4.14
+4.14  Draw an 'X' on a panel in a frame
+      Featuring: java.awt.Graphics, javax.swing.JPanel, paintComponent,
+      getWidth/Height, drawLine, javax.swing.JFrame (+ basic config)
 
                             /// CHAPTER 5 ///
 
-5.2
+5.2   Counter-controlled repetition with while (nothing new)
 
-5.3
+5.3   Counter-controlled repetition with for
 
-5.4
+5.4   Example use of for: sum even integers and calculate compound interest
 
-5.5
+5.5   Demonstrate do...while
 
-5.6
+5.6   Using switch to count letter grades (A, B,...) in GradeBook example
 
-5.7
+5.7   Testing break and continue in for loop
 
-5.8
+5.8   Display logical operators (&&, ||,...) truth table (true && false,...)
 
-5.10
+5.10  Drawing rectangle or oval
+      Featuring: drawRect, drawOval
 
                             /// CHAPTER 6 ///
 
-6.4
+6.4   Find maximum of three double values(testing declaring method with
+      multiple params)
 
-6.9
+6.9   Roll a dice 6000000 times and output each face frequency
+      Featuring: java.util.Random
 
-6.10
+6.10  Simulate the dice game Crabs
+      Featuring: random, enum, final
 
-6.11
+6.11  Demonstrate field and local variable scopes
 
-6.12
+6.12  Demonstrate overloaded method (same name but return different type)
 
-6.13
+6.13  Draw a colored smiley face
+      Featuring: java.awt.Color, setColor, fillOval, fillRect
 
                             /// CHAPTER 7 ///
 
-7.4
+7.4   Examples using array: init an array using 2 methods, loop through an
+      array to calculate sum, illustrate frequency using barchart, roll a dice
+      6000000 times and use array member as counter, apply array in analyzing
+      student poll (validate value)
+      Featuring: ArrayIndexOutOfBoundsException (StudentPoll)
 
-7.5
+7.5   Create class Card and class DeckOfCards that contain Card, create a new
+      deck, shuffle and deal all cards
+      Featuring: toString()
 
-7.6
+7.6   Testing enhanced for statement (for (int member : array))
 
-7.7
+7.7   Demonstrate passing array to method (reference and value)
 
-7.8
+7.8   GradeBook class using an array to store and process test grades
+      (output min/max grade, barchart, average)
 
-7.9
+7.9   Init two-dimensional array (different row's length) and display values
+      by row
 
-7.10
+7.10  GradeBook class using a two-dimensional array to store and process grades
 
-7.11
+7.11  Evaluating average of variable-length argument lists (unspecified
+      number of arguments)
+      Featuring: method(type... vars) (vars will be accessed as an array)
 
-7.12
+7.12  Initializing an array using command-line arguments
 
-7.13
+7.13  Testing Arrays class methods and System.arraycopy
+      Featuring: java.util.Arrays, sort, fill, equals, binarySearch,
+      System.arraycopy
 
-7.14
+7.14  Testing ArrayList<T> collection
+      Featuring: java.util.ArrayList, add, size, get, remove, contains
 
-7.15
+7.15  Draw a rainbow
+      Featuring: fillArc
 
                             /// CHAPTER 8 ///
 
-8.2
+8.2   Set time and display in universal format string
+      Featuring: IllegalArgumentException
 
-8.3
+8.3   Show that accessing private member of a class will throw an exception
+      (still use Time1 class from 8.2)
 
-8.4
+8.4   Testing 'this' keyword in class
+      Featuring: this, 2 classes in 1 file
 
-8.5
+8.5   Testing overloaded constructor in Time class example (declare constructor
+      with different numbers of param)
 
-8.8
+8.8   Demonstrate composition: class Employee refer to class Date as a member
 
-8.9
+8.9   Demonstrate enum using Book example
+      Featuring: java.util.EnumSet, range, values
 
-8.11
+8.11  Testing static class member by maintain a count of the number of
+      Employee objects in memory
+      Featuring: static
 
-8.12
+8.12  Static import methods of Math class
+      Featuring: import java.lang.Math.*
 
-8.14
+8.14  Creating and import package Time1
+      Featuring: package <package name> (e.g: com.deitel.jhtp.ch08)
 
-8.15
+8.15  Testing package access by creating 2 classes in 1 file and 1 class
+      accesses other class data
 
-8.16
+8.16  Draw random lines by splitting into 3 classes: 1 to a line, 1 to hold
+      an array of lines and draw panel, 1 to create frame to hold panel
 
                             /// CHAPTER 9 ///
 
-9.4
+9.4   Demonstrate inheritance by creating subclass BasePlusCommissionEmployee
+      that extends superclass CommissionEmployee
+      Demonstrate accessing private and protected fields of superclass
+      from subclass object
+      Featuring: extends, protected
 
-9.8
+9.8   Displaying text and image using label
+      Featuring: java.awt.BorderLayout, javax.swing.ImageIcon,
+      javax.swing.JLabel
 
                             /// CHAPTER 10 ///
 
-10.3
+10.3  Demonstrate polymorphic behavior by assigning subclass reference
+      to superclass variable and call toString methods
 
-10.5
+10.5  Payroll system: return the appropriate earning for each type of Employee
+      using polymorphism
 
-10.7
+10.7  Return the appropriate payment amount for 2 unrelated class by invoking
+      the same methods using interface
+      Featuring: interface, implements

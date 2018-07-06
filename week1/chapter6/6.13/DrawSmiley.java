@@ -1,4 +1,4 @@
-// DrawSmiley.java - section 6.13
+// DrawSmiley.java
 // Draw a smile face with color
 
 import java.awt.Color;

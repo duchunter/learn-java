@@ -1,4 +1,4 @@
-// MethodOverload.java - section 6.12
+// MethodOverload.java
 // Overloaded method declarations
 
 public class MethodOverload {

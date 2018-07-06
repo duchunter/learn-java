@@ -1,5 +1,5 @@
 // InitArray.java - section 7.9
-// Initializing two-dimensional arrays and display value by row
+// Initializing two-dimensional array and display value by row
 
 public class InitArray {
   public static void main(String[] args) {

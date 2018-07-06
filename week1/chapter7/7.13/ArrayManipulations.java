@@ -1,5 +1,5 @@
-// ArrayManipulations.java - section 7.13
-// Test Arrays class methods and System.arraycopy.
+// ArrayManipulations.java
+// Test Arrays class methods and System.arraycopy
 
 import java.util.Arrays;
 

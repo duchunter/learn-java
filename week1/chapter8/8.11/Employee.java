@@ -1,9 +1,8 @@
 // Employee.java
 // Static variable used to maintain a count of the number of
-// Employee objects in memory.
+// Employee objects in memory
 
-public class Employee
-{
+public class Employee {
   // Fields
   private String firstName;
   private String lastName;

@@ -4,18 +4,16 @@
 public class PassArray {
   public static void main(String[] args) {
     int[] array = { 1, 2, 3, 4, 5 };
-    System.out.println(
-      "Effects of passing reference to entire array:\n"
-      + "The values of the original array are: "
-    );
+    System.out.println("Effects of passing reference to entire array:");
 
     // Output original array elements
+    System.out.println("The values of the original array are: ");
     for (int value : array) {
       System.out.printf("%d   ", value);
     }
 
     // Pass array reference and modify
-    modifyArray( array );
+    modifyArray(array);
 
     // Output modified array elements
     System.out.println("\n\nThe values of the modified array are:");
@@ -23,11 +21,8 @@ public class PassArray {
       System.out.printf("%d   ", value);
     }
 
-    System.out.printf(
-      "\n\nEffects of passing array element value:\n"
-      + "array[3] before modifyElement: %d\n",
-      array[3]
-    );
+    System.out.println("\n\nEffects of passing array element value:");
+    System.out.printf("array[3] before modifyElement: %d\n", array[3]);
 
     // Attempt to modify array[3] by passing value
     modifyElement(array[3]);
@@ -40,7 +35,7 @@ public class PassArray {
   public static void modifyArray(int[] array) {
     int length = array.length;
     for (int i = 0; i < length; i++) {
-      array[i] *= 2;      
+      array[i] *= 2;
     }
   }
 

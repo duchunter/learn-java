@@ -1,4 +1,4 @@
-// DrawSmileyTest.java - section 6.13
+// DrawSmileyTest.java
 // Test app that displays a smiley face
 
 import javax.swing.JFrame;

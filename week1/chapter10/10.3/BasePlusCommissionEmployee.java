@@ -1,6 +1,5 @@
 // BasePlusCommissionEmployee.java
-// BasePlusCommissionEmployee class try to access superclass protected field
-// and not get error
+// BasePlusCommissionEmployee class that extends CommissionEmployee
 
 public class BasePlusCommissionEmployee extends CommissionEmployee {
   private double baseSalary;

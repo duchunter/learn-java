@@ -1,5 +1,5 @@
-// InitArray.java - section 7.12
-// Initializing an array using command-line arguments.
+// InitArray.java
+// Initializing an array using command-line arguments
 
 public class InitArray {
   public static void main(String[] args) {

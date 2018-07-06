@@ -1,5 +1,5 @@
-// ArrayListCollection.java - section 7.14
-// Generic ArrayList<T> collection demonstration.
+// ArrayListCollection.java
+// ArrayList<T> collection demonstration
 
 import java.util.ArrayList;
 
