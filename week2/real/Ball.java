@@ -6,9 +6,9 @@ public class Ball {
   private Random randomNumbers = new Random();
   private enum Wall { NONE, TOP, BOTTOM, LEFT, RIGHT }
   private static final int MIN_SPEED = 1;
-  private static final int MAX_SPEED = 6;
+  private static final int MAX_SPEED = 3;
   private static final int MIN_RADIUS = 20;
-  private static final int MAX_RADIUS = 50;
+  private static final int MAX_RADIUS = 100;
 
   // Ball properties
   private final int radius;
@@ -17,9 +17,6 @@ public class Ball {
   private int speedX;
   private int speedY;
   private Color color;
-  private int newX;
-  private int newY;
-  private boolean collided;
 
   // Constructor
   public Ball() {
@@ -59,7 +56,7 @@ public class Ball {
     int diffX = Math.abs(b1.x - b2.x);
     int diffY = Math.abs(b1.y - b2.y);
     double distance = Math.sqrt(diffX * diffX + diffY * diffY);
-    return distance < (b1.radius + b2.radius);
+    return distance <= (b1.radius + b2.radius) - MAX_SPEED + 1;
   }
 
   // Check if this ball is about to collide with other ball
@@ -71,20 +68,20 @@ public class Ball {
 
   // Handle balls colliding
   public static void handleCollideBalls(Ball b1, Ball b2) {
-    b1.newX += b2.speedX;
-    b1.newY += b2.speedY;
-    b2.newX += b1.speedX;
-    b2.newY += b1.speedY;
-    b1.collided = true;
-    b2.collided = true;
+    int tempX = b1.speedX;
+    int tempY = b1.speedY;
+    b1.speedX = b2.speedX;
+    b1.speedY = b2.speedY;
+    b2.speedX = tempX;
+    b2.speedY = tempY;
   }
 
   // Check if ball still in frame
   public boolean inFrame(int width, int height) {
-    return (x - radius) > 0
-      && (y - radius) > 0
-      && (x + radius) < width
-      && (y + radius) < height;
+    return (x - radius) >= 0
+      && (y - radius) >= 0
+      && (x + radius) <= width
+      && (y + radius) <= height;
   }
 
   // Check if ball is collided with wall
@@ -98,13 +95,10 @@ public class Ball {
   // Check if ball is about to collide with wall
   public Wall willCollideWithWall(int width, int height) {
     Ball nextBall = futureBall(this);
-    if (!inFrame(width, height)) {
-      if ((nextBall.x - radius) < 0) return Wall.LEFT;
-      if ((nextBall.y - radius) < 0) return Wall.TOP;
-      if ((nextBall.x + radius) > width) return Wall.RIGHT;
-      if ((nextBall.y + radius) > height) return Wall.BOTTOM;
-    }
-
+    if ((nextBall.x - radius) < 0) return Wall.LEFT;
+    if ((nextBall.y - radius) < 0) return Wall.TOP;
+    if ((nextBall.x + radius) > width) return Wall.RIGHT;
+    if ((nextBall.y + radius) > height) return Wall.BOTTOM;
     return Wall.NONE;
   }
 
@@ -113,23 +107,15 @@ public class Ball {
     switch (side) {
       case TOP: case BOTTOM:
         speedY *= -1;
-        newY *= -1;
         break;
       case LEFT: case RIGHT:
         speedX *= -1;
-        newX *= -1;
         break;
     }
   }
 
   // Update movement tendency (speedX and speedY)
   public void updateMovement(Ball[] otherBalls, int width, int height) {
-    // Avoid colliding with walls
-    Wall side;
-    while ((side = willCollideWithWall(width, height)) != Wall.NONE) {
-      handleCollideWithWall(side);
-    }
-    
     // Avoid colliding with other balls
     for (Ball other : otherBalls) {
       if (willCollideWithBall(other)) {
@@ -137,17 +123,10 @@ public class Ball {
       }
     }
 
-    if (collided) {
-      speedX = newX;
-      speedY = newY;
-      if (speedX > MAX_SPEED || speedY > MAX_SPEED) {
-        speedX /= 2;
-        speedY /= 2;
-      }
-
-      newX = 0;
-      newY = 0;
-      collided = false;
+    // Avoid colliding with walls
+    Wall side;
+    while ((side = willCollideWithWall(width, height)) != Wall.NONE) {
+      handleCollideWithWall(side);
     }
   }
 

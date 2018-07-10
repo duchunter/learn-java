@@ -5,9 +5,9 @@ import java.util.Timer;
 
 public class Frame {
   // Some constant
-  private static final int SCREEN_WIDTH = 500;
-  private static final int SCREEN_HEIGHT = 500;
-  private static final long ANIMATION_PERIOD = 20L;
+  private static final int SCREEN_WIDTH = 600;
+  private static final int SCREEN_HEIGHT = 600;
+  private static final long ANIMATION_PERIOD = 15L;
   private static final long ANIMATION_DELAY = 0L;
 
   public static void main(String[] args) {
