@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "Todo",
+    "version": "1.0.0",
+    "sdkVersion": "27.0.0",
+    "icon": "./static/img/todo.png",
+    "splash": {
+      "backgroundColor": "#ffffff",
+      "resizeMode": "contain",
+      "image": "./static/img/todo.png"
+    },
+    "ios": {
+      "bundleIdentifier": "com.duchm.todo"
+    },
+    "android": {
+      "package": "com.duchm.todo"
+    }
+  }
+}
