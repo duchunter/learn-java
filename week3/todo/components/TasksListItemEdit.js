@@ -1,13 +1,17 @@
-// Render an item in tasksList in edit mode (not display mode)
-// and handle action: editTask
-// Props: index, item, stopEditing, editTask
-
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   StyleSheet, TextInput, View, TouchableOpacity, Image
 } from 'react-native';
+import { editTask } from '../actions';
 
-export default class TasksList extends React.Component {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    editTask: (id, content) => dispatch(editTask(id, content))
+  }
+}
+
+class TasksListItemEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,7 +28,7 @@ export default class TasksList extends React.Component {
   submitChange = () => {
     let notEmpty = this.state.newContent.trim().length > 0;
     if (notEmpty) {
-      this.props.editTask(this.props.index, this.state.newContent);
+      this.props.editTask(this.props.item.id, this.state.newContent);
       this.props.stopEditing();
     } else {
       alert("Content must not be empty");
@@ -40,7 +44,7 @@ export default class TasksList extends React.Component {
       <View style={styles.itemContainer}>
         {/* Input field to edit content */}
         <TextInput
-          style={styles.taskContent}
+          style={styles.input}
           value={this.state.newContent}
           onChangeText={this.handleContentTyping}
           onSubmitEditing={this.submitChange}
@@ -79,13 +83,17 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
 
-  taskContent: {
+  input: {
     paddingTop: 2,
     paddingBottom: 7,
     marginLeft: 30,
+    marginRight: 2,
     fontSize: 18,
     width: '70%',
     padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
   },
 
   iconButton: {
@@ -97,3 +105,5 @@ const styles = StyleSheet.create({
     width: 22
   }
 });
+
+export default connect(null, mapDispatchToProps)(TasksListItemEdit)

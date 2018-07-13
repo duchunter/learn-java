@@ -1,13 +1,17 @@
-// Add new task from input
-// Props: addNewTask()
-
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard
 } from 'react-native';
+import { addTask } from '../actions';
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addNewTask: (content) => dispatch(addTask(content))
+  }
+}
 
-export default class TaskInput extends React.Component {
+class TaskInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,6 +78,10 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     width: '80%',
     fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+    marginLeft: 5
   },
 
   addButton: {
@@ -90,3 +98,5 @@ const styles = StyleSheet.create({
     fontSize: 18
   }
 });
+
+export default connect(null, mapDispatchToProps)(TaskInput)

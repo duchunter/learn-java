@@ -1,26 +1,24 @@
-// Render tasks list and perform action: edit, delete, check, uncheck
-// Props: tasks, toogleCompleted, editTask, deleteTask
-
 import React from 'react';
+import { connect } from 'react-redux';
 import { StyleSheet, FlatList } from 'react-native';
 import TasksListItem from './TasksListItem';
 
-export default class TasksList extends React.Component {
+const mapStateToProps = (state) => {
+  return {
+    tasks: state.tasks
+  }
+}
+
+class TasksList extends React.Component {
   render() {
     return (
       <FlatList
         style={styles.list}
         data={this.props.tasks}
         keyboardShouldPersistTaps={'handled'}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({item, index}) => (
-          <TasksListItem
-            item={item}
-            index={index}
-            toogleCompleted={this.props.toogleCompleted}
-            editTask={this.props.editTask}
-            deleteTask={this.props.deleteTask}
-          />
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({item}) => (
+          <TasksListItem item={item} />
         )}
       />
     )
@@ -35,3 +33,5 @@ const styles = StyleSheet.create({
     overflow: 'scroll'
   }
 });
+
+export default connect(mapStateToProps, null)(TasksList)

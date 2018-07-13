@@ -90,10 +90,7 @@ export default class LoginScreen extends React.Component {
 
   render() {
     return (
-      <View style={[
-        styles.container,
-        { paddingBottom: this.state.viewPadding }
-      ]}>
+      <View style={styles.container}>
         <Text style={styles.header}> Welcome to Todo app </Text>
 
         {/* App image */}
@@ -144,6 +141,10 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 10,
     fontSize: 18,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 4,
+    marginBottom: 5
   },
 
   header: {

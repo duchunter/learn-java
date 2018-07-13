@@ -1,19 +1,24 @@
-// Render an item in tasksList in display mode (not edit mode)
-// and perform action: toogleCompleted, deleteTask
-// Props: index, item, toogleCompleted, startEditing, deleteTask
-
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   StyleSheet, Text, View, CheckBox, TouchableOpacity, Image
 } from 'react-native';
+import { toogleTask, deleteTask } from '../actions';
 
-export default class TasksList extends React.Component {
+const mapDispatchToProps = (dispatch) => {
+  return {
+    toogleTask: (id) => dispatch(toogleTask(id)),
+    deleteTask: (id) => dispatch(deleteTask(id))
+  }
+}
+
+class TasksListItemDisplay extends React.Component {
   render() {
     return (
       <View style={styles.itemContainer}>
         {/* A small check box to toogle task completed status */}
         <CheckBox
-          onValueChange={() => this.props.toogleCompleted(this.props.index)}
+          onValueChange={() => this.props.toogleTask(this.props.item.id)}
           value={this.props.item.completed}
         />
 
@@ -43,7 +48,7 @@ export default class TasksList extends React.Component {
         {/* Delete button */}
         <TouchableOpacity
           style={styles.iconButton}
-          onPress={() => this.props.deleteTask(this.props.index)}
+          onPress={() => this.props.deleteTask(this.props.item.id)}
         >
           <Image
             source={require('../static/img/trash.png')}
@@ -79,3 +84,5 @@ const styles = StyleSheet.create({
     width: 25
   }
 });
+
+export default connect(null, mapDispatchToProps)(TasksListItemDisplay)
