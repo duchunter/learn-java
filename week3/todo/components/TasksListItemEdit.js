@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import {
-  StyleSheet, TextInput, View, TouchableOpacity, Image
+  StyleSheet, TextInput, View, TouchableOpacity
 } from 'react-native';
 import { editTask } from '../actions';
 
@@ -55,10 +56,7 @@ class TasksListItemEdit extends React.Component {
           style={styles.iconButton}
           onPress={this.submitChange}
         >
-          <Image
-            source={require('../static/img/check.png')}
-            style={styles.icon}
-          />
+          <Icon name={'check'} size={25} />
         </TouchableOpacity>
 
         {/* Discard change button */}
@@ -66,10 +64,7 @@ class TasksListItemEdit extends React.Component {
           style={styles.iconButton}
           onPress={this.discardChange}
         >
-          <Image
-            source={require('../static/img/cross.png')}
-            style={styles.icon}
-          />
+          <Icon name={'close'} size={25} />
         </TouchableOpacity>
       </View>
     )

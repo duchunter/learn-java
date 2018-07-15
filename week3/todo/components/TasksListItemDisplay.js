@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import {
-  StyleSheet, Text, View, CheckBox, TouchableOpacity, Image
+  StyleSheet, Text, View, CheckBox, TouchableOpacity
 } from 'react-native';
 import { toogleTask, deleteTask } from '../actions';
 
@@ -39,10 +40,7 @@ class TasksListItemDisplay extends React.Component {
           style={styles.iconButton}
           onPress={this.props.startEditing}
         >
-          <Image
-            source={require('../static/img/edit.png')}
-            style={styles.icon}
-          />
+          <Icon name={'edit'} size={25} />
         </TouchableOpacity>
 
         {/* Delete button */}
@@ -50,10 +48,7 @@ class TasksListItemDisplay extends React.Component {
           style={styles.iconButton}
           onPress={() => this.props.deleteTask(this.props.item.id)}
         >
-          <Image
-            source={require('../static/img/trash.png')}
-            style={styles.icon}
-          />
+          <Icon name={'delete-forever'} size={25} />
         </TouchableOpacity>
       </View>
     )
@@ -78,11 +73,6 @@ const styles = StyleSheet.create({
   iconButton: {
     paddingRight: 5
   },
-
-  icon: {
-    height: 25,
-    width: 25
-  }
 });
 
 export default connect(null, mapDispatchToProps)(TasksListItemDisplay)

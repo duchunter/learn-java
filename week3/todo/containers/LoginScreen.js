@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   StyleSheet, Text, View, TextInput, Button,
-  Image, Dimensions, Keyboard, Platform
+  Image, Dimensions, Keyboard, Platform, TouchableOpacity
 } from 'react-native';
 
 const user = 'test';
@@ -65,20 +65,6 @@ export default class LoginScreen extends React.Component {
     });
   }
 
-  // Handle username typing
-  handleUsernameTyping = (text) => {
-    this.setState({
-      user: text
-    });
-  }
-
-  // Handle password typing
-  handlePasswordTyping = (text) => {
-    this.setState({
-      password: text
-    });
-  }
-
   // Validate user, password and login
   login() {
     if (this.state.user == user && this.state.password == password) {
@@ -106,23 +92,38 @@ export default class LoginScreen extends React.Component {
           })()}
         />
 
-        {/* Log in input fields */}
         <TextInput
           style={styles.input}
           placeholder="Username or Email (default: test)"
-          onChangeText={this.handleUsernameTyping}
+          onChangeText={(text) => this.setState({user: text})}
         />
         <TextInput
           style={styles.input}
           placeholder="Password (default: 123)"
           secureTextEntry={true}
-          onChangeText={this.handlePasswordTyping}
+          onChangeText={(text) => this.setState({password: text})}
         />
+
         <Button
           title="Login"
           color="orange"
           onPress={() => this.login()}
         />
+
+        <TouchableOpacity
+          style={{ marginTop: 10 }}
+          onPress={() => this.props.navigation.navigate('Forgot Password')}
+        >
+          <Text style={{ color: 'blue' }}> Forgot your password ? </Text>
+        </TouchableOpacity>
+
+        <Text> or </Text>
+
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('Register')}
+        >
+          <Text style={{ color: 'blue' }} >{"Don't have an account ?"}</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -149,5 +150,12 @@ const styles = StyleSheet.create({
 
   header: {
     fontSize: 25
+  },
+
+  buttonGroup: {
+    margin: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   }
 });

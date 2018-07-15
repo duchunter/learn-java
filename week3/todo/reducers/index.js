@@ -1,9 +1,16 @@
 const defaultState = {
-  tasks: [{
-    id: 1,
-    content: 'test',
-    completed: false
-  }]
+  tasks: [
+    {
+      id: 1,
+      content: 'test',
+      completed: false
+    },
+    {
+      id: 2,
+      content: 'do something',
+      completed: true
+    }
+  ]
 }
 
 export default function (state = defaultState, action) {
