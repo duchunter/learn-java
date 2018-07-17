@@ -1,11 +1,14 @@
 import React from 'react';
 import {
-  StyleSheet, View, Image, Dimensions, Keyboard, Platform
+  StyleSheet, View, Image, Dimensions, Keyboard,
+  Platform, ImageBackground, Alert
 } from 'react-native';
 import {
   Container, Content, Form, Item, Input, Label, Toast, H1, Button, Text
 } from 'native-base';
+import LocalAuth from 'react-native-local-auth';
 import TouchID from 'react-native-touch-id';
+import KeyChain from 'react-native-keychain';
 
 const user = 'test';
 const password = '123';
@@ -71,6 +74,7 @@ export default class LoginScreen extends React.Component {
   // Validate user, password and login
   login = () => {
     if (this.state.user == user && this.state.password == password) {
+      Keychain.setGenericPassword(this.state.user, this.state.password);
       this.props.navigation.navigate('App');
     } else {
       Toast.show({
@@ -83,82 +87,137 @@ export default class LoginScreen extends React.Component {
   }
 
   loginUsingTouchID = () => {
-    TouchID.authenticate('Authenticate with fingerprint').then(success => {
-      this.login();
-    }).catch(error => {
+    TouchID.isSupported().then(() => {
+      LocalAuth.authenticate({
+          reason: 'Log in using passcode or fingerprint',
+          falbackToPasscode: true,
+          suppressEnterPassword: true
+      }).then(() => {
+        Keychain.getGenericPassword().then(credentials => {
+          if (!credentials) {
+            Alert.alert(
+              'No credentials found'
+              `It looks like this is your first time here,
+              please log in using your credentials instead
+              then you can start using this functionality`,
+              [{text: 'OK'}]
+            );
+            return;
+          }
+
+          if (credentials.username === credentials.password === password) {
+            this.props.navigation.navigate('App');
+          } else {
+            Alert.alert(
+              'Invalid credentials'
+              `Credentials stored on this device is invalid,
+              please log in using your credentials instead`,
+              [{text: 'OK'}]
+            );
+            Keychain.resetGenericPassword();
+          }
+        }).catch(err => {
+          Toast.show({
+            text: 'Something went wrong',
+            buttonText: 'Okay',
+            type: 'danger',
+            position: 'top'
+          });
+        });
+      }).catch(err => {
+        Toast.show({
+          text: err.code,
+          buttonText: 'Okay',
+          type: 'danger',
+          position: 'top'
+        });
+      });
+    }).catch(err => {
       Toast.show({
-        text: 'Something went wrong!',
+        text: 'This functionality is not supported on this device',
         buttonText: 'Okay',
         type: 'danger',
         position: 'top'
-      })
+      });
     });
   }
 
   render() {
     return (
       <Container>
-        <Content padder>
-          <View style={styles.container}>
-            <H1> Welcome to Todo app </H1>
+        <ImageBackground
+          source={require('../static/img/bg.jpg')}
+          style={{width: '100%', height: '100%'}}
+        >
+          <Content padder>
+            <View style={styles.container}>
+              <H1 style={styles.text}> Welcome to Todo app </H1>
 
-            {/* App image */}
-            <Image
-              source={require('../static/img/todo.png')}
-              style={(() => {
-                let h = this.state.dimensions.height - this.state.viewPadding;
-                return {
-                  height: h * 0.3,
-                  width: h * 0.3
-                }
-              })()}
-            />
-          </View>
-
-          <Form style={{marginBottom: 20}}>
-            <Item floatingLabel>
-              <Label> Username or Email (default: test) </Label>
-              <Input onChangeText={(text) => this.setState({user: text})} />
-            </Item>
-            <Item floatingLabel>
-              <Label> Password (default: 123) </Label>
-              <Input
-                onChangeText={(text) => this.setState({password: text})}
-                secureTextEntry={true}
+              {/* App image */}
+              <Image
+                source={require('../static/img/todo.png')}
+                style={(() => {
+                  let h = this.state.dimensions.height - this.state.viewPadding;
+                  return {
+                    height: h * 0.3,
+                    width: h * 0.3,
+                    marginTop: 10
+                  }
+                })()}
               />
-            </Item>
-          </Form>
+            </View>
 
-          <View style={styles.container}>
-            <Button danger block
-              style={styles.button}
-              onPress={this.login}
-            >
-              <Text> Log in </Text>
-            </Button>
+            <Form style={{marginBottom: 20}}>
+              <Item floatingLabel>
+                <Label style={styles.text}>
+                  Username or Email (default: test)
+                </Label>
+                <Input
+                  style={styles.text}
+                  onChangeText={(text) => this.setState({user: text})}
+                />
+              </Item>
+              <Item floatingLabel>
+                <Label style={styles.text}> Password (default: 123) </Label>
+                <Input
+                  style={styles.text}
+                  onChangeText={(text) => this.setState({password: text})}
+                  secureTextEntry={true}
+                />
+              </Item>
+            </Form>
 
-            <Button block
-              style={styles.button}
-              onPress={this.loginUsingTouchID}
-            >
-              <Text> Log in using Touch ID </Text>
-            </Button>
+            <View style={styles.container}>
+              <Button danger block
+                style={styles.button}
+                onPress={this.login}
+              >
+                <Text> Log in </Text>
+              </Button>
 
-            <Button block transparent small
-              style={styles.button}
-              onPress={() => this.props.navigation.navigate('Forgot Password')}
-            >
-              <Text> Forgot your password ? </Text>
-            </Button>
+              <Button block
+                style={styles.button}
+                onPress={this.loginUsingTouchID}
+              >
+                <Text> Log in using passcode or fingerprint </Text>
+              </Button>
 
-            <Button block transparent small
-              style={styles.button}
-              onPress={() => this.props.navigation.navigate('Register')}
-            >
-              <Text> {"Don't have an account ?"} </Text>
-            </Button>
-          </View>
-        </Content>
+              <Button block transparent small
+                style={styles.button}
+                onPress={() => this.props.navigation.navigate('Forgot Password')}
+              >
+                <Text style={styles.text}> Forgot your password ? </Text>
+              </Button>
+
+              <Button block transparent small
+                style={styles.button}
+                onPress={() => this.props.navigation.navigate('Register')}
+              >
+                <Text style={styles.text}> {"Don't have an account ?"} </Text>
+              </Button>
+            </View>
+          </Content>
+        </ImageBackground>
       </Container>
     );
   }
@@ -173,5 +232,9 @@ const styles = StyleSheet.create({
 
   button: {
     margin: 5
+  },
+
+  text: {
+    color: 'white'
   }
 });

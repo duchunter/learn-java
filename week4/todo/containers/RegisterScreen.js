@@ -6,7 +6,11 @@ import {Toast} from 'native-base';
 
 export default class RegisterScreen extends React.Component {
   static navigationOptions = {
-    title: 'Create new account'
+    title: 'Create new account',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: '#212121'
+    }
   }
 
   constructor(props) {

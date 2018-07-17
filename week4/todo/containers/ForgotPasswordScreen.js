@@ -1,12 +1,19 @@
 import React from 'react';
 import {
-  StyleSheet, Text, View, TextInput, Button
+  Dimensions, ImageBackground
 } from 'react-native';
-import {Toast} from 'native-base';
+import {
+  Container, Content, Item, Input, Label, Toast, Button, Text,
+  Card, CardItem, Left, Right, Body
+} from 'native-base';
 
 export default class ForgotPasswordScreen extends React.Component {
   static navigationOptions = {
-    title: 'Recover password'
+    title: 'Recover password',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: '#212121'
+    }
   }
 
   constructor(props) {
@@ -36,46 +43,48 @@ export default class ForgotPasswordScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={{ width: '80%' }} >
-          <Text style={{fontSize: 18}}>
-            Please enter your email address to search for your account
-          </Text>
-        </View>
+      <Container>
+        <ImageBackground
+          source={require('../static/img/bg.jpg')}
+          style={{width: '100%', height: '100%'}}
+        >
+          <Content padder>
+            <Card style={{marginTop: 150}}>
+              <CardItem>
+                <Body>
+                  <Text>
+                    Please enter your email address to search for your account
+                  </Text>
+                </Body>
+              </CardItem>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={(text) => this.setState({email: text})}
-          onSubmitEditing={this.sendEmail}
-        />
+              <CardItem>
+                <Body>
+                  <Item regular>
+                    <Input
+                      placeholder="Email"
+                      onChangeText={(text) => this.setState({email: text})}
+                      onSubmitEditing={this.sendEmail}
+                    />
+                  </Item>
+                </Body>
+              </CardItem>
 
-        <Button
-          title="Search"
-          color="blue"
-          onPress={this.sendEmail}
-        />
-      </View>
+              <CardItem>
+                <Left />
+                <Body />
+                <Right>
+                  <Button
+                    onPress={this.sendEmail}
+                  >
+                    <Text> Send </Text>
+                  </Button>
+                </Right>
+              </CardItem>
+            </Card>
+          </Content>
+        </ImageBackground>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-
-  input: {
-    width: '80%',
-    height: 50,
-    padding: 10,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    margin: 5
-  }
-});
