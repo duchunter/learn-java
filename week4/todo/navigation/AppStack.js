@@ -1,7 +1,7 @@
 import { createDrawerNavigator } from 'react-navigation'
 import DashboardStack from './DashboardStack'
 import Profile from '../containers/Profile'
-import CustomDrawerContent from '../containers/CustomDrawerContent'
+import SideBar from '../components/SideBar'
 
 const AppStack = createDrawerNavigator(
   {
@@ -10,12 +10,7 @@ const AppStack = createDrawerNavigator(
   },
   {
     initialRouteName: 'Dashboard',
-    contentComponent: CustomDrawerContent,
-    contentOptions: {
-      labelStyle: {
-        fontSize: 18
-      }
-    }
+    contentComponent: SideBar
   }
 );
 
