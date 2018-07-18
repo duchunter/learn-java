@@ -1,8 +1,11 @@
 import React from 'react';
 import {
-  StyleSheet, Text, View, TextInput, Button, TouchableOpacity
+  Dimensions, ImageBackground
 } from 'react-native';
-import {Toast} from 'native-base';
+import {
+  Container, Content, Item, Input, Label, Toast, Button, Text,
+  Card, CardItem, Left, Right, Body, Form, H2
+} from 'native-base';
 
 export default class RegisterScreen extends React.Component {
   static navigationOptions = {
@@ -16,11 +19,26 @@ export default class RegisterScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      dimensions: Dimensions.get('screen'),
       email: '',
       user: '',
       password: '',
       confirmPassword: ''
     }
+  }
+
+  componentDidMount() {
+    Dimensions.addEventListener('change', this.handleDimensionsChange);
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.handleDimensionsChange);
+  }
+
+  handleDimensionsChange = (newDimensions) => {
+    this.setState({
+      dimensions: newDimensions.screen
+    });
   }
 
   register = () => {
@@ -34,67 +52,77 @@ export default class RegisterScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={{ fontSize: 18, marginBottom: 10 }}>
-          Enter your info
-        </Text>
-
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={(text) => this.setState({email: text})}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Username"
-          onChangeText={(text) => this.setState({user: text})}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}
-          onChangeText={(text) => this.setState({password: text})}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Confirm password"
-          secureTextEntry={true}
-          onChangeText={(text) => this.setState({confirmPassword: text})}
-        />
-
-        <Button
-          title="Register"
-          color="orange"
-          onPress={this.register}
-        />
-
-        <TouchableOpacity
-          style={{ marginTop: 10 }}
-          onPress={() => this.props.navigation.navigate('Login')}
+      <Container>
+        <ImageBackground
+          source={require('../static/img/bg.jpg')}
+          style={{width: '100%', height: '100%'}}
         >
-          <Text style={{ color: 'blue' }}> Already have an account ? </Text>
-        </TouchableOpacity>
-      </View>
+          <Content padder>
+            <Card style={{
+              marginTop: this.state.dimensions.height * 0.05
+            }}>
+              {/* Card header */}
+              <CardItem header bordered>
+                <H2> Enter your info </H2>
+              </CardItem>
+
+              {/* Form inside card */}
+              <CardItem>
+                <Form style={{width: '80%'}}>
+                  <Item floatingLabel>
+                    <Label> Email </Label>
+                    <Input
+                      onChangeText={(text) => this.setState({email: text})}
+                    />
+                  </Item>
+                  <Item floatingLabel>
+                    <Label> Username </Label>
+                    <Input
+                      onChangeText={(text) => this.setState({user: text})}
+                    />
+                  </Item>
+                  <Item floatingLabel>
+                    <Label> Password </Label>
+                    <Input
+                      onChangeText={(text) => this.setState({password: text})}
+                    />
+                  </Item>
+                  <Item floatingLabel>
+                    <Label> Confirm password </Label>
+                    <Input
+                      onChangeText={(text) => this.setState({confirmPassword: text})}
+                    />
+                  </Item>
+                </Form>
+              </CardItem>
+
+              {/* Margin between form and buttons */}
+              <CardItem />
+
+              {/* Footer contains button */}
+              <CardItem footer bordered
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <Button
+                  style={{marginRight: 5}}
+                  onPress={this.register}
+                >
+                  <Text> Register </Text>
+                </Button>
+                <Button danger
+                  onPress={() => this.props.navigation.navigate('Login')}
+                >
+                  <Text> Cancel </Text>
+                </Button>
+              </CardItem>
+            </Card>
+          </Content>
+        </ImageBackground>
+      </Container>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white'
-  },
-
-  input: {
-    width: '80%',
-    height: 40,
-    padding: 10,
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    marginBottom: 5
-  }
-});

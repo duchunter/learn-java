@@ -8,7 +8,7 @@ import {
 } from 'native-base';
 import LocalAuth from 'react-native-local-auth';
 import TouchID from 'react-native-touch-id';
-import KeyChain from 'react-native-keychain';
+import * as Keychain from 'react-native-keychain';
 
 const user = 'test';
 const password = '123';
@@ -74,7 +74,7 @@ export default class LoginScreen extends React.Component {
   // Validate user, password and login
   login = () => {
     if (this.state.user == user && this.state.password == password) {
-      Keychain.setGenericPassword(this.state.user, this.state.password);
+      Keychain.setGenericPassword(this.state.user, this.state.password)
       this.props.navigation.navigate('App');
     } else {
       Toast.show({
@@ -96,22 +96,22 @@ export default class LoginScreen extends React.Component {
         Keychain.getGenericPassword().then(credentials => {
           if (!credentials) {
             Alert.alert(
-              'No credentials found'
-              `It looks like this is your first time here,
-              please log in using your credentials instead
-              then you can start using this functionality`,
+              'No credentials found',
+              'It looks like this is your first time here,\n'
+              + 'please log in using your credentials instead\n'
+              + 'then you can start using this functionality\n',
               [{text: 'OK'}]
             );
             return;
           }
 
-          if (credentials.username === credentials.password === password) {
+          if (credentials.username === user && credentials.password === password) {
             this.props.navigation.navigate('App');
           } else {
             Alert.alert(
-              'Invalid credentials'
-              `Credentials stored on this device is invalid,
-              please log in using your credentials instead`,
+              'Invalid credentials',
+              'Credentials stored on this device is invalid\n',
+              + 'Please log in using your credentials instead',
               [{text: 'OK'}]
             );
             Keychain.resetGenericPassword();

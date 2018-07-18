@@ -19,8 +19,23 @@ export default class ForgotPasswordScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      dimensions: Dimensions.get('screen'),
       email: ''
     }
+  }
+
+  componentDidMount() {
+    Dimensions.addEventListener('change', this.handleDimensionsChange);
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change', this.handleDimensionsChange);
+  }
+
+  handleDimensionsChange = (newDimensions) => {
+    this.setState({
+      dimensions: newDimensions.screen
+    });
   }
 
   sendEmail = () => {
@@ -49,7 +64,9 @@ export default class ForgotPasswordScreen extends React.Component {
           style={{width: '100%', height: '100%'}}
         >
           <Content padder>
-            <Card style={{marginTop: 150}}>
+            <Card style={{
+              marginTop: this.state.dimensions.height * 0.1,
+            }}>
               <CardItem>
                 <Body>
                   <Text>
@@ -70,16 +87,25 @@ export default class ForgotPasswordScreen extends React.Component {
                 </Body>
               </CardItem>
 
-              <CardItem>
-                <Left />
-                <Body />
-                <Right>
-                  <Button
-                    onPress={this.sendEmail}
-                  >
-                    <Text> Send </Text>
-                  </Button>
-                </Right>
+              {/* Footer contains button */}
+              <CardItem footer
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end'
+                }}
+              >
+                <Button
+                  style={{marginRight: 5}}
+                  onPress={this.sendEmail}
+                >
+                  <Text> Send Email </Text>
+                </Button>
+                <Button danger
+                  onPress={() => this.props.navigation.navigate('Login')}
+                >
+                  <Text> Cancel </Text>
+                </Button>
               </CardItem>
             </Card>
           </Content>
