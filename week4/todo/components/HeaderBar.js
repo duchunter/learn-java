@@ -1,27 +1,55 @@
 import React from 'react';
+import { Modal } from 'react-native';
 import {
-  Icon, Left, Body, Title, Right, Button, Header
+  Icon, Left, Body, Title, Right, Button, Header, Text
 } from 'native-base';
 import { headerBackground } from '../theme/Dark';
+import SettingsModal from './SettingsModal';
 
-export default AllTasks = (props) => {
-  return (
-    <Header style={headerBackground}>
-      <Left>
-        <Button transparent
-          onPress={() => props.navigation.openDrawer()}
-        >
-          <Icon name={'menu'}/>
+export default class HeaderBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      settingsModalVisible: false
+    }
+  }
+
+  setSettingsVisible = (visible) => {
+    this.setState({
+      settingsModalVisible: visible
+    })
+  }
+
+  render() {
+    return (
+      <Header style={headerBackground}>
+        {/* Basic header bar */}
+        <Left>
+          <Button transparent
+            onPress={() => this.props.navigation.openDrawer()}
+          >
+            <Icon name={'menu'}/>
+          </Button>
+        </Left>
+        <Body>
+          <Title>Todo App</Title>
+        </Body>
+        <Right>
+        <Button transparent onPress={() => this.setSettingsVisible(true)}>
+          <Icon name={'settings'}/>
         </Button>
-      </Left>
-      <Body>
-        <Title>Todo App</Title>
-      </Body>
-      <Right>
-      <Button transparent>
-        <Icon name={'settings'}/>
-      </Button>
-      </Right>
-    </Header>
-  );
+        </Right>
+
+        {/* Settings modal */}
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.settingsModalVisible}
+          onRequestClose={() => this.setSettingsVisible(false)}
+        >
+          <SettingsModal setVisible={this.setSettingsVisible}/>
+        </Modal>
+      </Header>
+    );
+  }
 }
