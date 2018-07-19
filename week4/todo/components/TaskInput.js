@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  StyleSheet, Text, View, TextInput, TouchableOpacity, Keyboard
-} from 'react-native';
+import { Keyboard } from 'react-native';
 import { addTask } from '../actions';
-import {Toast} from 'native-base';
+import { Toast, Item, Input, Button, Right, Icon } from 'native-base';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -18,11 +16,6 @@ class TaskInput extends React.Component {
     this.state = {
       text: ''
     }
-  }
-
-  // Change 'text' state as user type
-  handleTypingTask = (text) => {
-    this.setState({ text });
   }
 
   // Validate text and add new task
@@ -42,67 +35,31 @@ class TaskInput extends React.Component {
 
     // Close keyboard, clear input field and reset 'text'
     Keyboard.dismiss();
-    this.textInput.clear();
+    this.textInput._root.clear();
     this.setState({ text: '' });
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        {/* Plus button */}
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={this.submitText}
-        >
-          <Text style={styles.plus}> + </Text>
-        </TouchableOpacity>
-
-        {/* Input field */}
-        <TextInput
-          style={styles.input}
-          placeholder="Add new task"
+      <Item rounded style={{
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 10
+      }}>
+        <Input
+          placeholder='Add new task'
           ref={input => { this.textInput = input }}
-          onChangeText={this.handleTypingTask}
+          onChangeText={(text) => this.setState({ text })}
           onSubmitEditing={this.submitText}
         />
-      </View>
+        <Right>
+          <Button rounded transparent onPress={this.submitText}>
+            <Icon name={'add'} style={{color: '#43a047'}}/>
+          </Button>
+        </Right>
+      </Item>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width:'100%',
-  },
-
-  input: {
-    height: 50,
-    paddingRight: 10,
-    paddingLeft: 10,
-    width: '80%',
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-    marginLeft: 5
-  },
-
-  addButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'green',
-    borderRadius: 22,
-    height: 22,
-    width: 22
-  },
-
-  plus: {
-    color: 'white',
-    fontSize: 18
-  }
-});
 
 export default connect(null, mapDispatchToProps)(TaskInput)

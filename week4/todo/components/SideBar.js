@@ -3,30 +3,24 @@ import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import { SafeAreaView } from 'react-navigation';
 import { ImageBackground } from 'react-native';
 import {
-  Container, Content, H3, Text, ListItem, Left, Body, Thumbnail
+  Container, Content, H3, Text, ListItem, Left, Body, Thumbnail, Badge, Right
 } from 'native-base';
 
 const drawerRoutes = [
   {
     route: 'Dashboard',
     icon: 'dashboard',
-    color: '#f44336'
+    color: '#f44336',
   },
   {
     route: 'Profile',
     icon: 'portrait',
-    color: '#2196f3'
+    color: '#2196f3',
+    notification: 1
   }
 ]
 
 export default class SideBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-  }
-
   render() {
     return (
       <Container>
@@ -58,7 +52,6 @@ export default class SideBar extends React.Component {
             </ImageBackground>
 
             {/* Navigation list */}
-            <ListItem itemDivider icon />
             {drawerRoutes.map((item, index) => (
               <ListItem icon
                 key={index}
@@ -86,6 +79,13 @@ export default class SideBar extends React.Component {
                     {item.route}
                   </Text>
                 </Body>
+                {item.notification && (
+                  <Right>
+                    <Badge>
+                      <Text>{item.notification}</Text>
+                    </Badge>
+                  </Right>
+                )}
               </ListItem>
             ))}
 
@@ -101,7 +101,6 @@ export default class SideBar extends React.Component {
                 <Text>Log out</Text>
               </Body>
             </ListItem>
-            <ListItem itemDivider icon/>
           </Content>
         </SafeAreaView>
       </Container>

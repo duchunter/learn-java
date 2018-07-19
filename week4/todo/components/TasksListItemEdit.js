@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import {
-  StyleSheet, TextInput, View, TouchableOpacity
-} from 'react-native';
+  ListItem, Icon, Button, Right, Body, Left, Toast, Input, Item
+} from 'native-base';
 import { editTask } from '../actions';
-import {Toast} from 'native-base';
+import { font } from '../theme/Dark';
 
 const mapDispatchToProps = (dispatch) => {
   return {
     editTask: (id, content) => dispatch(editTask(id, content))
   }
+}
+
+const darkTheme = {
+  color: '#212121'
 }
 
 class TasksListItemEdit extends React.Component {
@@ -48,63 +51,42 @@ class TasksListItemEdit extends React.Component {
 
   render() {
     return (
-      <View style={styles.itemContainer}>
-        {/* Input field to edit content */}
-        <TextInput
-          style={styles.input}
-          value={this.state.newContent}
-          onChangeText={this.handleContentTyping}
-          onSubmitEditing={this.submitChange}
-        />
+      <ListItem>
+        <Body>
+          {/* Input field to edit content */}
+          <Item rounded>
+            <Input
+              value={this.state.newContent}
+              onChangeText={this.handleContentTyping}
+              onSubmitEditing={this.submitChange}
+            />
+          </Item>
+        </Body>
 
-        {/* Submit change button */}
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={this.submitChange}
-        >
-          <Icon name={'check'} size={25} />
-        </TouchableOpacity>
+        <Right style={{
+          flex: 0.5,
+          flexDirection: 'row',
+          justifyContent: 'flex-end'
+        }}>
+          {/* Submit change button */}
+          <Button transparent onPress={this.submitChange}>
+            <Icon
+              type={'MaterialIcons'} name={'check'} size={25}
+              style={font}
+            />
+          </Button>
 
-        {/* Discard change button */}
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={this.discardChange}
-        >
-          <Icon name={'close'} size={25} />
-        </TouchableOpacity>
-      </View>
+          {/* Discard change button */}
+          <Button transparent onPress={this.discardChange}>
+            <Icon
+              type={'MaterialIcons'} name={'close'} size={25}
+              style={font}
+            />
+          </Button>
+        </Right>
+      </ListItem>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: 10,
-  },
-
-  input: {
-    paddingTop: 2,
-    paddingBottom: 7,
-    marginLeft: 30,
-    marginRight: 2,
-    fontSize: 18,
-    width: '70%',
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
-  },
-
-  iconButton: {
-    paddingRight: 7
-  },
-
-  icon: {
-    height: 22,
-    width: 22
-  }
-});
 
 export default connect(null, mapDispatchToProps)(TasksListItemEdit)

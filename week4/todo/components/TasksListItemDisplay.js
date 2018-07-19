@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/dist/MaterialIcons';
 import {
-  StyleSheet, Text, View, CheckBox, TouchableOpacity
-} from 'react-native';
+  ListItem, CheckBox, Text, Icon, Button, Right, Body, Left
+} from 'native-base';
 import { toogleTask, deleteTask } from '../actions';
+import { font } from '../theme/Dark';
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -16,63 +16,55 @@ const mapDispatchToProps = (dispatch) => {
 class TasksListItemDisplay extends React.Component {
   render() {
     return (
-      <View style={styles.itemContainer}>
+      <ListItem button
+        onPress={() => this.props.toogleTask(this.props.item.id)}
+      >
         {/* A small check box to toogle task completed status */}
         <CheckBox
-          onValueChange={() => this.props.toogleTask(this.props.item.id)}
-          value={this.props.item.completed}
+          color={'green'}
+          checked={this.props.item.completed}
+          onPress={() => this.props.toogleTask(this.props.item.id)}
         />
 
-        {/* Task content */}
-        <Text style={[
-          styles.taskContent,
-          {
+        <Body>
+          {/* Task content */}
+          <Text style={{
             textDecorationLine: this.props.item.completed
               ? 'line-through'
               : 'none'
-          }
-        ]}>
-          {this.props.item.content}
-        </Text>
+          }}>
+            {this.props.item.content}
+          </Text>
+        </Body>
 
-        {/* Edit button */}
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={this.props.startEditing}
-        >
-          <Icon name={'edit'} size={25} />
-        </TouchableOpacity>
+        <Right style={{
+          flex: 0.5,
+          flexDirection: 'row',
+          justifyContent: 'flex-end'
+        }}>
+          {/* Edit button */}
+          <Button transparent
+            onPress={this.props.startEditing}
+          >
+            <Icon
+              type={'MaterialIcons'} name={'edit'} size={25}
+              style={font}
+            />
+          </Button>
 
-        {/* Delete button */}
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={() => this.props.deleteTask(this.props.item.id)}
-        >
-          <Icon name={'delete-forever'} size={25} />
-        </TouchableOpacity>
-      </View>
+          {/* Delete button */}
+          <Button transparent
+            onPress={() => this.props.deleteTask(this.props.item.id)}
+          >
+            <Icon
+              type={'MaterialIcons'} name={'delete-forever'} size={25}
+              style={font}
+            />
+          </Button>
+        </Right>
+      </ListItem>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: 10,
-  },
-
-  taskContent: {
-    paddingTop: 2,
-    paddingBottom: 2,
-    fontSize: 18,
-    width: '70%',
-    padding: 10,
-  },
-
-  iconButton: {
-    paddingRight: 5
-  },
-});
 
 export default connect(null, mapDispatchToProps)(TasksListItemDisplay)
