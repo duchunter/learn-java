@@ -1,4 +1,4 @@
-package com.todo;
+package com.cystack.todo;
 
 import com.facebook.react.ReactActivity;
 import io.tradle.react.LocalAuthPackage;

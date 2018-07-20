@@ -49,12 +49,12 @@ export default class Active extends React.Component {
             </CardItem>
 
             <CardItem style={{ padding: 0 }}>
-              <Left />
+              <Left/>
               <Body>
                 <Button danger small
                   onPress={this.verifyEmail}
                 >
-                  <Text>Verify your email</Text>
+                  <Text>Verify</Text>
                 </Button>
               </Body>
             </CardItem>
@@ -64,7 +64,7 @@ export default class Active extends React.Component {
                 <Label>Day created:</Label>
               </Left>
               <Body>
-                <Text>Sep 16th, 2018</Text>
+                <Text>July 16th, 2018</Text>
               </Body>
             </CardItem>
           </Card>
