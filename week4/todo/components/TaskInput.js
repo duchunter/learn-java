@@ -35,7 +35,7 @@ class TaskInput extends React.Component {
 
     // Close keyboard, clear input field and reset 'text'
     Keyboard.dismiss();
-    this.textInput._root.clear();
+    //this.textInput._root.clear();
     this.setState({ text: '' });
   }
 
@@ -48,7 +48,8 @@ class TaskInput extends React.Component {
       }}>
         <Input
           placeholder='Add new task'
-          ref={input => { this.textInput = input }}
+          //ref={input => { this.textInput = input }}
+          value={this.state.text}
           onChangeText={(text) => this.setState({ text })}
           onSubmitEditing={this.submitText}
         />

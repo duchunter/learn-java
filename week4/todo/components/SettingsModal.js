@@ -4,7 +4,7 @@ import {
   Title, CardItem
 } from 'native-base';
 import { Switch } from 'react-native';
-import { headerBackground } from '../theme/Dark';
+import { headerBackground, headerFont } from '../theme/Dark';
 
 export default class SettingsModal extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ export default class SettingsModal extends React.Component {
               </Button>
             </Left>
             <Body>
-              <Title>Settings</Title>
+              <Title style={headerFont}>Settings</Title>
             </Body>
             <Right />
         </Header>

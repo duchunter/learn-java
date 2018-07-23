@@ -6,13 +6,14 @@ import {
   Container, Content, Item, Input, Label, Toast, Button, Text,
   Card, CardItem, Left, Right, Body, Form, H2
 } from 'native-base';
+import { headerFont, headerBackground } from '../theme/Dark';
 
 export default class RegisterScreen extends React.Component {
   static navigationOptions = {
     title: 'Create new account',
-    headerTintColor: 'white',
+    headerTintColor: headerFont.color,
     headerStyle: {
-      backgroundColor: '#212121'
+      backgroundColor: headerBackground.backgroundColor
     }
   }
 

@@ -3,7 +3,7 @@ import { Modal } from 'react-native';
 import {
   Icon, Left, Body, Title, Right, Button, Header, Text
 } from 'native-base';
-import { headerBackground } from '../theme/Dark';
+import { headerBackground, headerFont } from '../theme/Dark';
 import SettingsModal from './SettingsModal';
 
 export default class HeaderBar extends React.Component {
@@ -28,15 +28,15 @@ export default class HeaderBar extends React.Component {
           <Button transparent
             onPress={() => this.props.navigation.openDrawer()}
           >
-            <Icon name={'menu'}/>
+            <Icon type={'MaterialIcons'} name={'menu'} color={'white'}/>
           </Button>
         </Left>
         <Body>
-          <Title>Todo App</Title>
+          <Title style={headerFont}>Todo App</Title>
         </Body>
         <Right>
         <Button transparent onPress={() => this.setSettingsVisible(true)}>
-          <Icon name={'settings'}/>
+          <Icon type={'MaterialIcons'} name={'settings'} color={'white'}/>
         </Button>
         </Right>
 

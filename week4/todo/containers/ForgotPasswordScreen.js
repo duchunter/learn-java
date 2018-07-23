@@ -6,13 +6,14 @@ import {
   Container, Content, Item, Input, Label, Toast, Button, Text,
   Card, CardItem, Left, Right, Body
 } from 'native-base';
+import { headerFont, headerBackground } from '../theme/Dark';
 
 export default class ForgotPasswordScreen extends React.Component {
   static navigationOptions = {
     title: 'Recover password',
-    headerTintColor: 'white',
+    headerTintColor: headerFont.color,
     headerStyle: {
-      backgroundColor: '#212121'
+      backgroundColor: headerBackground.backgroundColor
     }
   }
 

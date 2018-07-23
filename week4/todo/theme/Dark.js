@@ -1,9 +1,17 @@
+import { Platform } from 'react-native'
+
+const isIos = Platform.OS == 'ios'
+
 export const font = {
   color: '#212121'
 }
 
+export const headerFont = {
+	color: isIos ? 'white' : 'black'
+}
+
 export const headerBackground = {
-  backgroundColor: '#212121'
+  backgroundColor: isIos ? '#060606' : '#212121'
 }
 
 export const footerTabBackground = {
