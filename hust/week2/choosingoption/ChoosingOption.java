@@ -7,6 +7,7 @@ public class ChoosingOption {
       "I don't"
     };
 
+    // Show popup with custom buttons
     int option = JOptionPane.showOptionDialog(
       null,
       "Do you want to change to first class ticket?",
@@ -18,6 +19,7 @@ public class ChoosingOption {
       null
     );
 
+    // Show result popup
     JOptionPane.showMessageDialog(
       null,
       "You have chosen: " + (
