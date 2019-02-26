@@ -34,5 +34,16 @@ public class DateTest {
     date4.print("dd/mm/yyy");
     date4.setMonth("Nov");
     date4.print("dd/MM/yyy");
+
+    // SORT DATE TEST
+    MyDate date1 = new MyDate("1/10/1990");
+    MyDate date2 = new MyDate("1/10/1990");
+    MyDate date3 = new MyDate("10/1/1998");
+    System.out.println("Compare date1 with date2 return " + DateUtils.compareDate(date1, date2));
+    System.out.println("Compare date1 with date3 return " + DateUtils.compareDate(date1, date3));
+    System.out.println("Compare date4 with date3 return " + DateUtils.compareDate(date4, date3));
+
+    MyDate[] dateList = { date4, date2, date1, date4, date3, date2 };
+    DateUtils.sortDate(dateList);
   }
 }
