@@ -1,16 +1,23 @@
 public class DigitalVideoDisc extends Media {
   // Attributes
-  public static final int MAXWORD = 20;
   private String director;
   private int length;
 
   // Constructor
-  public DigitalVideoDisc(String title, String category, float cost) {
-    super(title, category, cost);
+  public DigitalVideoDisc(String id, String title) {
+    super(id, title);
   }
 
-  public DigitalVideoDisc(String title, String category, String director, int length, float cost) {
-    this(title, category, cost);
+  public DigitalVideoDisc(String id, String title, String category) {
+    super(id, title, category);
+  }
+
+  public DigitalVideoDisc(String id, String title, String category, float cost) {
+    super(id, title, category, cost);
+  }
+
+  public DigitalVideoDisc(String id, String title, String category, String director, int length, float cost) {
+    this(id, title, category, cost);
     this.director = director;
     this.length = length;
   }

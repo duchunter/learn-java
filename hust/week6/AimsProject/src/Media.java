@@ -1,19 +1,34 @@
 public class Media {
-  private int id;
+  private String id;
   private String title;
   private String category;
   private float cost;
   private boolean isFree = false;
 
   // Constructor
-  public Media(String title, String category, float cost) {
+  public Media(String id, String title) {
+	this.id = id;
+	this.title = title;
+  }
+
+  public Media(String id, String title, String category) {
+    this(id, title);
+    this.category = category;
+  }
+
+  public Media(String id, String title, String category, float cost) {
     super();
+    this.id = id;
     this.title = title;
     this.category = category;
     this.cost = cost;
   }
 
   // Getter and setter
+  public String getId() {
+    return this.id;
+  }
+
   public String getTitle() {
     return this.title;
   }
@@ -40,5 +55,15 @@ public class Media {
   }
   public void setIsFree(boolean isFree) {
     this.isFree = isFree;
+  }
+
+  // Medthods
+  public void printMedia() {
+    System.out.print("- " + id + " - " + title + " - " + category + ": " + cost);
+    if (isFree) {
+      System.out.print(" (free)");
+    }
+
+    System.out.println();
   }
 }

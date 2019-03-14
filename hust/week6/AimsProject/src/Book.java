@@ -6,8 +6,16 @@ public class Book extends Media {
   private List<String> authors = new ArrayList<String>();
 
   // Constructor
-  public Book(String title, String category, float cost) {
-    super(title, category, cost);
+  public Book(String id, String title) {
+    super(id, title);
+  }
+
+  public Book(String id, String title, String category) {
+    super(id, title, category);
+  }
+  
+  public Book(String id, String title, String category, float cost) {
+    super(id, title, category, cost);
   }
 
   // Methods
