@@ -131,7 +131,7 @@ public class Order {
       input.nextLine();
 
       for (int i = 0; i < nbTracks; i++) {
-        System.out.print("\n- Track " + i + 1);
+        System.out.println("\n- Track " + (i + 1));
         System.out.print("Enter track's title: ");
         String trackTitle = input.nextLine();
 

@@ -8,7 +8,7 @@ public class Aims {
     Thread thread = new Thread(daemon);
     thread.setDaemon(true);
     thread.start();
-    
+
     int choice;
     Scanner input = new Scanner(System.in);
     Order order = null;
@@ -69,6 +69,8 @@ public class Aims {
           }
       }
     } while (choice != 0);
+
+    input.close();
   }
 
   public static void showMenu() {
