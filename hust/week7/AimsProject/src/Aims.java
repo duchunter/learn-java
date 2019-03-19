@@ -4,10 +4,14 @@ public class Aims {
   private static final int MAX_LIMITTED_ORDERS = 2;
 
   public static void main(String[] args) {
+    MemoryDaemon daemon = new MemoryDaemon();
+    Thread thread = new Thread(daemon);
+    thread.setDaemon(true);
+    thread.start();
+    
     int choice;
     Scanner input = new Scanner(System.in);
     Order order = null;
-    MemoryDaemon daemon = new MemoryDaemon();
 
     do {
       showMenu();
