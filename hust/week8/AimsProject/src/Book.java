@@ -1,15 +1,15 @@
 import java.util.ArrayList;
-import java.util.List.SortedList;
 import java.util.List;
 import java.util.Map;
-import java.util.List.SortedMap;
+import java.util.Collections;
+import java.util.TreeMap;
 
 public class Book extends Media {
   // Attributes
   private List<String> authors = new ArrayList<String>();
   private String content;
-  private List<String> contentTokens = new SortedList<String>();
-  private Map<String, Integer> wordFrequency = new SortedMap<String, Integer>();
+  private List<String> contentTokens = new ArrayList<String>();
+  private Map<String, Integer> wordFrequency = new TreeMap<String, Integer>();
 
   // Constructor
   public Book(String id, String title) {
@@ -59,11 +59,43 @@ public class Book extends Media {
   }
 
   public void processContent() {
-    System.out.println(this.content.split("re*(,|.)\\s"));
+    contentTokens.clear();
+    for (String word : this.content.split("[.,]\\s|\\s")) {
+      word = word.toLowerCase();
+      contentTokens.add(word);
+      boolean hasKey = wordFrequency.containsKey(word);
+      if (!hasKey) {
+        wordFrequency.put(word, 1);
+      } else {
+        wordFrequency.replace(word, wordFrequency.get(word) + 1);
+      }
+    }
+
+    Collections.sort(contentTokens);
   }
 
   public void print() {
-    System.out.println(this.authors.toString());
+    printMedia();
+    System.out.println("Authors: " + this.authors.toString());
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Book info:\n\tID: " + getId());
+    sb.append("\n\tTitle: " + getTitle());
+    sb.append("\n\tCategory: " + getCategory());
+    sb.append("\n\tCost: " + getCost());
+    sb.append("\n\tIs free: " + getIsFree());
+    sb.append("\n\tAuthors: " + authors.toString());
+    sb.append("\n\tContent length: " + contentTokens.size());
+    sb.append("\n\tWord frequency: ");
+    for( Map.Entry m : wordFrequency.entrySet()) {
+      sb.append("\n" + m.getKey() + ": " + m.getValue());
+    }
+
+    sb.append("\n");
+    return sb.toString();
   }
 
   // Supporting methods

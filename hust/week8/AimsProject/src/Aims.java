@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Collections;
 
 public class Aims {
-  private static final int MAX_LIMITTED_ORDERS = 2;
-
   public static void main(String[] args) {
     // Daemon thread to check memory used
     MemoryDaemon daemon = new MemoryDaemon();
