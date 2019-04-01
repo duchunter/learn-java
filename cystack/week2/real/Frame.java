@@ -17,6 +17,7 @@ public class Frame {
     // Create new frame and panel
     JFrame app = new JFrame();
     Panel panel = new Panel();
+    // app.setTitle("");
     app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     app.setResizable(false);
     app.add(panel);
