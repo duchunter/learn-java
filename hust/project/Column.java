@@ -2,8 +2,8 @@ import java.awt.Graphics;
 
 public class Column extends Component {
   // Column size unit constants
-  private static final int HEIGHT_UNIT = 5;
-  private static final int WIDTH_UNIT = 5;
+  private static final int HEIGHT_UNIT = 10;
+  private static final int WIDTH_UNIT = 20;
   private static final int PADDING = 20;
 
   // Max height among columns
@@ -25,24 +25,36 @@ public class Column extends Component {
     }
   }
 
-  // Methods
-
   // Move up and down
-  void moveVertical(int offset) {
-    int y = super.getY();
-    super.setY(y + offset * maxValue * HEIGHT_UNIT + PADDING);
+  void moveVertical(int offset, int frames) {
+    int nextY = y + offset * maxValue * HEIGHT_UNIT + PADDING;
+    setNext(x, nextY, frames);
   }
 
   // Move right or left
-  void moveHorizontal(int offset) {
-    int x = super.getX();
-    super.setX(x + offset * (WIDTH_UNIT + PADDING));
+  void moveHorizontal(int offset, int frames) {
+    int nextX = x + offset * (WIDTH_UNIT + PADDING);
+    setNext(nextX, y, frames);
   }
 
   // Draw a column
   @Override
   public void draw(Graphics g) {
-    g.setColor(super.getColor());
-    g.fillRect(super.getX(), super.getY(), width, height);
+    g.setColor(color);
+    g.fillRect(x, y, width, height);
+  }
+
+  // Test
+  public void info() {
+    System.out.println(x);
+    System.out.println(y);
+    System.out.println(color);
+    System.out.println(nextX);
+    System.out.println(nextY);
+    System.out.println(speedX);
+    System.out.println(speedY);
+    System.out.println(value);
+    System.out.println(height);
+    System.out.println(width);
   }
 }

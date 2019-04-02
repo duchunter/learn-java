@@ -9,9 +9,15 @@ public abstract class Component {
   public static final Color RED = new Color(221, 20, 60);
 
   // Attributes
-  private int x;
-  private int y;
-  private Color color;
+  protected int x;
+  protected int y;
+  protected Color color;
+
+  // Animation attributes
+  protected int nextX;
+  protected int nextY;
+  protected int speedX;
+  protected int speedY;
 
   // Constructor
   public Component(int x, int y, Color color) {
@@ -20,31 +26,44 @@ public abstract class Component {
     this.color = color;
   }
 
-  // Getter and Setter
-  void setX(int x) {
-    this.x = x;
-  }
-
-  int getX() {
-    return x;
-  }
-
-  void setY(int y) {
-    this.y = y;
-  }
-
-  int getY() {
-    return y;
-  }
-
-  void setColor(Color color) {
+  // Set color
+  public void setColor(Color color) {
     this.color = color;
   }
 
-  Color getColor() {
-    return color;
+  // Set next destination and speed
+  public void setNext(int x, int y, int frames) {
+    nextX = x;
+    int deltaX = x - this.x;
+    if (deltaX != 0) {
+      speedX = deltaX / frames;
+      if (speedX == 0) {
+        speedX = 1;
+      }
+    } else {
+      speedX = 0;
+    }
+
+    nextY = y;
+    int deltaY = y - this.y;
+    if (deltaY != 0) {
+      speedY = deltaY / frames;
+      if (speedY == 0) {
+        speedY = 1;
+      }
+    } else {
+      speedY = 0;
+    }
   }
 
-  // Methods
+  // Update position
+  public void move() {
+    x += speedX;
+    y += speedY;
+    if (x >= nextX) x = nextX;
+    if (y >= nextY) y = nextY;
+  }
+
+  // Draw component
   abstract void draw(Graphics g);
 }
