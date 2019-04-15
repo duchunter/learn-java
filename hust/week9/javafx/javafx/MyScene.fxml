@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="251.0" prefWidth="416.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="hust.soict.ictglobal.gui.javafx.MyController">
+			 
+   <children>
+      <Button fx:id="myButton" layoutX="63.0" layoutY="54.0" mnemonicParsing="false" onAction="#showDateTime" prefHeight="25.0" prefWidth="135.0" text="Show Date Time" />
+      <TextField fx:id="myTextField" layoutX="134.0" layoutY="126.0" />
+   </children>
+</AnchorPane>

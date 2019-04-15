@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+
+<GridPane hgap="25.0" prefHeight="279.0" prefWidth="389.0" vgap="15.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+   <columnConstraints>
+      <ColumnConstraints />
+      <ColumnConstraints maxWidth="140.0" minWidth="132.0" prefWidth="132.0" />
+      <ColumnConstraints maxWidth="64.0" minWidth="56.0" prefWidth="64.0" />
+      <ColumnConstraints />
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Label text="Enter username and password" GridPane.columnSpan="2" />
+      <Label text="Usernamel" GridPane.rowIndex="1" />
+      <Label text="Password" GridPane.rowIndex="2" />
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+   </children>
+</GridPane>
