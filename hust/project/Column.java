@@ -32,23 +32,26 @@ public class Column {
   private int value;
   private int height;
   private int width;
+  private Color color;
+  Rectangle rect;
   public VBox self;
 
   // Constructor
   public Column(int x, int y, int value) {
-	this.x = x;
-	this.y = y;
+  	this.x = x;
+  	this.y = y;
     this.value = value;
     this.height = value * HEIGHT_UNIT;
     this.width = WIDTH_UNIT;
+    this.color = Color.ORANGE;
     if (value > maxValue) {
       maxValue = value;
     }
 
-    Rectangle rect = new Rectangle(0, 0, this.width, this.height);
+    rect = new Rectangle(0, 0, this.width, this.height);
     rect.setArcWidth(BORDER_RADIUS);
     rect.setArcHeight(BORDER_RADIUS);
-    rect.setFill(Color.ORANGE);
+    rect.setFill(this.color);
 
     Text text = new Text("" + value);
     text.setFont(new Font("Arial",20));
@@ -62,48 +65,16 @@ public class Column {
 
   // Move up and down
   void moveVertical(int offset, EventHandler callback) {
-	int delta = offset * maxValue * HEIGHT_UNIT + PADDING;
+	  int delta = offset * maxValue * HEIGHT_UNIT + PADDING;
     y = y + delta;
     move(0, delta, callback);
   }
 
   // Move right or left
   void moveHorizontal(int offset, EventHandler callback) {
-	int delta = offset * (WIDTH_UNIT + PADDING);
+	  int delta = offset * (WIDTH_UNIT + PADDING);
     x = x + delta;
     move(delta, 0, callback);
-  }
-
-  // Test move
-  void testMove() {
-	  TranslateTransition transition1 = new TranslateTransition(Duration.millis(1000), self);
-	  transition1.setByX(100);
-	  transition1.setByY(0);
-	  TranslateTransition transition2 = new TranslateTransition(Duration.millis(1000), self);
-	  transition2.setByX(0);
-	  transition2.setByY(100);
-	  SequentialTransition sequentialTransition = new SequentialTransition();
-	  PauseTransition pause = new PauseTransition(Duration.millis(1000));
-      sequentialTransition.getChildren().addAll(transition1, pause, transition2);
-      sequentialTransition.play();
-  }
-
-  // Test move 2
-  void testMove2() {
-	  TranslateTransition transition1 = new TranslateTransition(Duration.millis(1000), self);
-	  transition1.setByX(100);
-	  transition1.setByY(0);
-	  TranslateTransition transition2 = new TranslateTransition(Duration.millis(1000), self);
-	  transition2.setByX(0);
-	  transition2.setByY(100);
-	  transition1.setOnFinished(new EventHandler<ActionEvent>() {
-
-          @Override
-          public void handle(ActionEvent event) {
-              transition2.play();
-          }
-      });
-	  transition1.play();
   }
 
   // Move
@@ -117,5 +88,28 @@ public class Column {
     transition.setByY(y);
     transition.setOnFinished(callback);
     transition.play();
+  }
+
+  void setSelected() {
+    changeColor(Color.RED);
+  }
+
+  void setFinished() {
+    changeColor(Color.BLUE);
+  }
+
+  void setConsidering() {
+    changeColor(Color.GREEN);
+  }
+
+  // Change color
+  void changeColor(Color color) {
+    FillTransition fill = new FillTransition();
+    fill.setDuration(Duration.millis(500));
+    fill.setFromValue(this.color);
+    fill.setToValue(color);
+    fill.setShape(rect);
+    this.color = color;
+    fill.play();
   }
 }

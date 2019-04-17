@@ -31,7 +31,7 @@ public class Animation extends Application {
     stage.setScene(scene);
     stage.show();
 
-    pick(1);
+    pick(0);
   }
 
   public EventHandler<ActionEvent> pass = new EventHandler<ActionEvent>() {
@@ -53,19 +53,6 @@ public class Animation extends Application {
     }
   }
 
-  public void sort() {
-    int n = array.length;
-    for (int i = 1; i < n; ++i) {
-      int key = array[i];
-      int j = i - 1;
-      while (j >= 0 && array[j] > key) {
-          array[j + 1] = array[j];
-          j = j - 1;
-      }
-      array[j + 1] = key;
-    }
-  }
-
   public void pick(int i) {
     EventHandler<ActionEvent> next = new EventHandler<ActionEvent>() {
         @Override
@@ -74,7 +61,23 @@ public class Animation extends Application {
         }
     };
 
+    EventHandler<ActionEvent> kickstart = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          cols[i].setFinished();
+          cols[i].moveVertical(-1, pass);
+          pick(i + 1);
+        }
+    };
+
+    if (i == 0) {
+      cols[i].setSelected();
+      cols[i].moveVertical(1, kickstart);
+      return;
+    }
+
     if (i < array.length) {
+      cols[i].setSelected();
       cols[i].moveVertical(1, next);
     }
   }
@@ -93,6 +96,7 @@ public class Animation extends Application {
           if (i > 0) {
             loop(i - 1, current);
           } else {
+            cols[i].setFinished();
             cols[i].moveVertical(-1, nextPick);
           }
         }
@@ -110,6 +114,7 @@ public class Animation extends Application {
       cols[i + 1].moveHorizontal(1, pass);
       cols[i].moveHorizontal(-1, nextLoop);
     } else {
+      cols[i + 1].setFinished();
       cols[i + 1].moveVertical(-1, nextPick);
     }
   }
