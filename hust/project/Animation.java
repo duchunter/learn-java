@@ -20,18 +20,30 @@ public class Animation extends Application {
 
   @Override
   public void start(Stage stage) {
-    init();
+    // init();
     stage.setTitle("Test");
     final Scene scene = new Scene(new Group(), 600, 450);
     scene.setFill(Color.WHITE);
-    for (int i = 0; i < array.length; i++) {
-    	((Group)scene.getRoot()).getChildren().add(cols[i].self);
+    // for (int i = 0; i < array.length; i++) {
+    // 	((Group)scene.getRoot()).getChildren().add(cols[i].self);
+    // }
+
+    Pole pole = new Pole();
+    ((Group)scene.getRoot()).getChildren().add(pole.self);
+
+    Disk[] disks = new Disk[3];
+    for (int i = 0; i < 3; i++) {
+      Disk disk = new Disk(i);
+      disks[i] = disk;
+      ((Group)scene.getRoot()).getChildren().add(disk.self);
     }
 
     stage.setScene(scene);
     stage.show();
 
-    pick(0);
+    // pick(0);
+    disks[0].moveHorizontal(2);
+    disks[1].moveVertical(5);
   }
 
   public EventHandler<ActionEvent> pass = new EventHandler<ActionEvent>() {
