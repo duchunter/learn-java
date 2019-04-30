@@ -35,23 +35,33 @@ public class Disk {
     self.setFill(Pole.colors[index]);
   }
 
+  public void performMove(int index, int offset) {
+    SequentialTransition action = new SequentialTransition();
+    action.getChildren().addAll(
+      moveVertical(Pole.MAX_DISK + 1),
+      moveHorizontal(offset),
+      moveVertical(index)
+    );
+    action.play();
+  }
+
   // Move up and down
-  void moveVertical(int index) {
+  TranslateTransition moveVertical(int index) {
 	  int y = (Pole.MAX_DISK - index) * Pole.HEIGHT_UNIT - Pole.POLE_BORDER_RADIUS / 2;
     int delta = y - this.y;
     this.y = y;
-    move(0, delta);
+    return move(0, delta);
   }
 
   // Move right or left
-  void moveHorizontal(int offset) {
+  TranslateTransition moveHorizontal(int offset) {
 	  int delta = offset * (Pole.MAX_WIDTH + Pole.BASE_PADDING);
     x = x + delta;
-    move(delta, 0);
+    return move(delta, 0);
   }
 
   // Move
-  void move(int x, int y) {
+  TranslateTransition move(int x, int y) {
     TranslateTransition transition = new TranslateTransition(
       Duration.millis(500),
       self
@@ -59,6 +69,6 @@ public class Disk {
 
     transition.setByX(x);
     transition.setByY(y);
-    transition.play();
+    return transition;
   }
 }

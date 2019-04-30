@@ -42,8 +42,7 @@ public class Animation extends Application {
     stage.show();
 
     // pick(0);
-    disks[0].moveHorizontal(2);
-    disks[1].moveVertical(5);
+    disks[2].performMove(0, 2);
   }
 
   public EventHandler<ActionEvent> pass = new EventHandler<ActionEvent>() {
